@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+}
+
+.container{
+margin-top: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.chooseExpense{
+    margin-top: -15px;
+    margin-left: 5px;
+}
+.secondDiv{
+    margin-top: 5px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.btn1{
+    
+    margin-bottom: -5px;
+    margin-left: 15px;
+}
