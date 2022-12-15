@@ -44,26 +44,23 @@ load();
 
 async function getData() {
 
-  let ax=axios.get('https://crudcrud.com/api/212d99707c9a42419181f4942e96fcca/exTracker').then((res)=>{
+  try{
+    let res=await axios.get('https://crudcrud.com/api/1d00722aa2a24e30bb0f17ff5dafda39/exTracker');
     details=res.data
-    // console.log(details);
-  }).catch((er)=>console.log(er))
-  if(ax){
-    await ax
-  }else{
-    setData()
-  }
+  }catch{(e)=>console.log(e)}
 
 }
 
 // to send data to local storage
 async function setData(e,c,d) {
-  await axios.post('https://crudcrud.com/api/212d99707c9a42419181f4942e96fcca/exTracker',{
+  try{
+    await axios.post('https://crudcrud.com/api/1d00722aa2a24e30bb0f17ff5dafda39/exTracker',{
       'expense':e.value,
       'catagory':c,
       'description':d.value
      });
-     await getData()
+     load()
+  }catch{(e)=>console.log(e)}
 
 }
 
@@ -81,7 +78,6 @@ function save() {
   };
   details.push(data);
   setData(expense,catagory,description);
-  // console.log(details);
   table();
   load()
   expense.value='';
@@ -169,15 +165,16 @@ function edit(index) {
 // update data
 
 async function updateData(e,c,d,id){
-  await axios.put('https://crudcrud.com/api/212d99707c9a42419181f4942e96fcca/exTracker/'+id,{
+  try{
+    await axios.put('https://crudcrud.com/api/1d00722aa2a24e30bb0f17ff5dafda39/exTracker/'+id,{
       'expense':e,
       'catagory':c,
       'description':d
     });
+    load()
 
-    
-    // await setData();
-    await getData();
+    // await getData();
+  }catch{(e)=>console.log(e)}
 }
 
 // update function
@@ -204,14 +201,17 @@ function update(index) {
 // delete function
 async function deleteData(i) {
   let id=details[i]._id;
- await axios.delete('https://crudcrud.com/api/212d99707c9a42419181f4942e96fcca/exTracker/'+id);
- await getData();
- await load()
+  try{
+    await axios.delete('https://crudcrud.com/api/1d00722aa2a24e30bb0f17ff5dafda39/exTracker/'+id);
+    load();
+  }catch{(e)=>console.log(e)}
   
 }
 
 async function load(){
-  await getData()
-  await table()
-  console.log('loaded');
+  try{
+    await getData()
+    table()
+  }catch{(e)=>console.log(e)}
+ 
 }
